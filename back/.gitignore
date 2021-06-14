@@ -1,0 +1,5 @@
+/node_modules
+/environments/.env.dev
+/environments/.env.qa
+/environments/.env.preprod
+.DS_Store
