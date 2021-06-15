@@ -4,6 +4,7 @@ services:
     image: mongo:latest
     ports: 
       - 27017:27017
+    hostname: localhost
     volumes:
       - db-data:/data/db
       - mongo-config:/data/configdb
