@@ -1,0 +1,4 @@
+# import EmployeeType from "EmployeeType.graphql"
+type Query {
+  hola: String!
+}

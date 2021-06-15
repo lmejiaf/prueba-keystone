@@ -1,12 +1,27 @@
-import { ApolloServer, gql } from "apollo-server";
+import dotEnv from "dotenv";
+
+dotEnv.config({
+  path: `./environments/.env.${process.env.NODE_ENV}`
+});
 
 
+import express from "express";
+import cors from "cors";
+import { ApolloServer } from "apollo-server-express";
+import { schema } from "./src/transporte/graphql";
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-const server = new ApolloServer({ });
 
-// The `listen` method launches a web server.
-server.listen({port: process.env.APP_PORT, }).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+const app = express();
+
+app.use(cors());
+
+const server = new ApolloServer({
+  schema,
+  playground: true,
+  introspection: true,
+});
+server.applyMiddleware({ app });
+
+app.listen(process.env.APP_PORT, () => {
+  console.log("App runing on port: ", process.env.APP_PORT);
 });
